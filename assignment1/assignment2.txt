@@ -1,0 +1,3 @@
+The Pam rule with which we make su work is:
+auth sufficient pam_question.so
+if one can answer a question, that is sufficient and success is returned.

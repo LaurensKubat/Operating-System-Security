@@ -1,0 +1,58 @@
+1. 
+a.
+In /etc/pam.d/common-auth we find the following two rules:
+auth [success=1 default=ignore] pam_unix.so nullok_secure -(1)
+auth requisite pam-deny.so  -(2)
+auth required pam-permit.so -(3)
+
+Here the first rule (1) specifies in the control value how many lines to skip if succesful
+Thus if pam_unix.so passes, (2) will be skipped and (3) will be executed.
+(2) has the requisite flag, thus if it fails, then it ends execution and returns
+failure. pam-deny.so always returns failure. Thus in combination with (1), if
+the authentication through pam_unix fails, then (2) returns failure.
+(3) has the required flag, thus if it fails, then execution continues but returns failure
+else it returns success. pam-permit always returns success, thus if (1) succeeds
+succes is returned.
+
+In /etc/pam.d/common-session we find the following rule
+session optional pam_systemd.so
+pam_systemd registers the user session with systemd. The control flag is optional
+thus if the user is succesfully registered with systemd does not matter for the
+rest of the common-session module
+
+in /etc/pam.d/runuser we find 
+auth            sufficient      pam_rootok.so
+session         optional        pam_keyinit.so revoke
+session         required        pam_limits.so
+session         required        pam_unix.so
+
+here rootok returns true if you're the root. The sufficient flag stop execution of 
+the subsequent rules. Thus if you're root the other rules dont matter anymore for
+runuser
+
+b.
+disallow ssh with password:
+auth [success=1 default=ignore] pam_listfile.so item=user sense=allow file=/tmp/users
+@include common-auth
+---check ssh key---
+
+We bypass the common-auth if a user is in the users file. Common-auth does regular auth
+through pam_unix.
+
+If a user is in the list, we bypass SSH key authentication, else we do sshkey authentication
+auth [success=1 default=ignore] pam_listfile.so item=user sense=allow file=/tmp/users
+auth [succes=1 default=ignore] ---check sshkey---
+@include common-auth
+
+I couldn't find a pam module that checks a given ssh key vs the known ssh key for the
+user, thus i wrote ---check sshkey---
+
+
+disallow ssh with pubkey
+
+allow users in list to ssh without auth:
+auth sufficient pam_listfile.so item=user sense=allow file=/tmp/users
+sufficient ensures that if pam_listfile passes, execution ends and passes
+item specifies that we are dealing with users, sense that if a user is in the file
+we pass. We run this as the first rule in sshd
+
