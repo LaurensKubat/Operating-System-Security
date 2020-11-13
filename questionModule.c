@@ -1,6 +1,7 @@
 #define PAM_SM_AUTH
 
 #include <stdio.h>
+#include <math.h>
 #include <security/pam_appl.h>
 #include <security/pam_modules.h>
 
@@ -22,7 +23,7 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **ar
     };
     int question = rand() % 5;
 
-    printf(questions[question]);
+    puts(questions[question]);
     char answer[50];
     gets(answer);
     if (answers[question] == answer) {
