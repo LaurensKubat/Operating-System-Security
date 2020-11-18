@@ -7,7 +7,7 @@ clean:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 
 insert:
-	insmod hello.ko
+	sudo /sbin/insmod hello.ko
 
 remove:
-	rmmod hello.ko
+	sudo /sbin/rmmod hello.ko
