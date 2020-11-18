@@ -8,12 +8,10 @@ MODULE_DESCRIPTION("A Simple Hello World module");
 
 static int __init hello_init(void)
 {
-    register int i asm("eax");
-    __asm__("mov %cr4 %eax");
     printk(KERN_INFO "Hello world!\n");
-    char snum[20];
-    sprintf(snum, "%d", i);
-    printk(KERN_INFO snum);
+    unsigned long long result;
+    __asm__("movq %%cr4, %%rax\n" : "=a"(result));
+    printk("Value of CR4 = %llx\n", result);
     return 0;    // Non-zero return means that the module couldn't be loaded.
 }
 
