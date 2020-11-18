@@ -11,7 +11,9 @@ static int __init hello_init(void)
     register int i asm("eax");
     __asm__("mov %cr4 %eax");
     printk(KERN_INFO "Hello world!\n");
-    printk(KERN_INFO i);
+    char snum[20];
+    itoa(i, snum, 10);
+    printk(KERN_INFO snum);
     return 0;    // Non-zero return means that the module couldn't be loaded.
 }
 
