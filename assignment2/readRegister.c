@@ -12,7 +12,7 @@ static int __init hello_init(void)
     __asm__("mov %cr4 %eax");
     printk(KERN_INFO "Hello world!\n");
     char snum[20];
-    itoa(i, snum, 10);
+    sprintf(snum, "%d", i);
     printk(KERN_INFO snum);
     return 0;    // Non-zero return means that the module couldn't be loaded.
 }
