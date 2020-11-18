@@ -1,0 +1,19 @@
+A.
+The cr4 register is used to control multiple settings, such as page size extension.
+Page size extension is a flag which if it is 0, the page size is 4KiB, if 1, page
+size is 4MiB. Now if this is 0 and a programme can set it to 1, the programme can
+read into the memory space of other programmes (The increase in size causes pages 
+to overlap), which a user programme isnt supposed to be able to do. Thus a user 
+programme shouldn't be able to write to cr4
+
+B.
+0x55555555513d <main+8>                 mov    %cr4,%rax 
+causes the segmentation fault. It tries to move the contents of %cr4 into %rax.
+thus read cr4.
+
+C.
+---
+
+D.
+the value of cr4 is: Value of CR4 = 606e0, as printed by my kernel module.
+the module source code is readRegister.c and the Makefile makes readRegister.c
