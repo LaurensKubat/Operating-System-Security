@@ -1,0 +1,4 @@
+A.
+The cr4 register is used to control multiple settings, such as page size extension.
+Page size extension is a flag which if it is 0, the page size is 4KiB, if 1, page
+size is 4MiB. Now if this is 0 and a programme can set it to 1, th
