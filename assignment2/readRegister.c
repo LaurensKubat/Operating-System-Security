@@ -9,7 +9,7 @@ MODULE_DESCRIPTION("A Simple Hello World module");
 static int __init hello_init(void)
 {
     register int i asm("eax");
-    __asm__("mov %cr4 %eax")
+    __asm__("mov %cr4 %eax");
     printk(KERN_INFO "Hello world!\n");
     printk(KERN_INFO i);
     return 0;    // Non-zero return means that the module couldn't be loaded.
