@@ -1,0 +1,24 @@
+A.
+showdate first checks the userpermissions to /etc/suid-debug using access(),
+then tries to get the file descriptor through fcntl three times and then checks the
+permissions for /etc/suid-debug and /etc/ld.so.preload through acces()
+(strace-output.txt lines 3 through 8)
+showdate then tries to set its uid and gid to 0 (root), line 29-30
+showdate then calls fork() and forks into 2 child processes. One of which gets the
+date and outputs it. The other child tries to open a shell(line 160)
+
+B.
+As know, showdate forks 2 children, one shows the date and the other
+does setuid(0) and open a shell using execve(/bin/sh). Somehow we need to
+get access to that shell opened by the second child, since that is a root shell,
+but i cant figure out how to access it
+
+C.
+A developer should be sure to set the uid back to that of the user after the 
+programme is done with every actions that needs to be different permissions than
+that of the user that executes it. eg.
+
+uuid = getuid();
+setuid(0);
+// do something as root
+setuid(uuid);
