@@ -1,0 +1,6 @@
+We want to overwrite the value of correct to be true, which means it should be > 0, we want to give an input
+such that the array password overwrites correct, since the memory is allocated on the heap, we need to give
+in input larger than 100 and also overwrite correct, which has the lucky number int inbetween it.
+An input of 108 chars gives us access, in this case 108 'a's as can bee seen below
+
+ ./buffer aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 
