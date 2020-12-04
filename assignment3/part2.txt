@@ -1,0 +1,15 @@
+(a)
+I wrote to simple programms to do a small bit of communication. I attached to bash scripts; one called
+'tellimrunning.sh' and the other 'checkifrunning.sh'. tellimrunning creates a file called communication.txt
+in /tmp and checkifrunning checks if communication.txt exists in /tmp.
+To run the scripts, we make them executable using 
+chmod u+x
+and run them normally using
+bash checkifrunning.sh
+./checkifrunning.sh
+
+(b)
+Since writing to /tmp might be normal behaviour for a programme, this does not get logged by Linux.
+At each reboot. /tmp is emptied, thus the communication is automatically discarded by Linux. This has the
+advantage that no traces of the communication stay behind. However it would probably be best to remove
+a message immediately after it has been processed by the receiver. Thus this isn't really an advantage
