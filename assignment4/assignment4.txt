@@ -1,0 +1,12 @@
+1b. The gadget pops 3 values of the stack into %rdi, %rsi and %rdx
+1c. We find helper() at 0x00401050
+    Running readelf -a vuln, we find the following section:
+     [24] .bss              NOBITS           0000000000404050  00003050
+       0000000000000010  0000000000000000  WA       0     0     8
+    .bss is used for variables that have not been allocated. we see the flag
+    WA, which stands for write and allocate. Thus we can write to the section
+    it is located at: 0x00404050
+1d. In stage 1, we put the following values in the buffer; the address of the gadget, a 0,
+    the writeable location and read_plt. Using this, we can read an input from stdin 
+    In stage 2. We once again put the address of the gadget, the writeable location, two dummy values and the
+    address of system()
