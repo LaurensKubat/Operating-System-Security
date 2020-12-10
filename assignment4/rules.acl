@@ -1,0 +1,86 @@
+# file: home/kali/dir1
+# owner: kali
+# group: kali
+user::rwx
+user:test1:rw-
+user:test2:r--
+user:test3:r--
+group::r-x
+mask::rwx
+other::r-x
+
+# file: home/kali/dir1/file1
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test2:r--
+user:test5:rwx
+user:test3:rw-
+group::r--
+mask::rwx
+other::r--
+
+# file: home/kali/dir1/file2
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test2:r--
+user:test5:rwx
+user:test3:r-x
+group::r--
+mask::rwx
+other::r--
+
+# file: home/kali/dir1/file3
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test2:r--
+user:test5:rwx
+user:test3:r--
+group::r--
+mask::rwx
+other::r--
+
+# file: home/kali/dir2
+# owner: kali
+# group: kali
+user::rwx
+user:test1:rw-
+user:test4:rw-
+group::r-x
+mask::rwx
+other::r-x
+
+# file: home/kali/dir2/file4
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test5:rwx
+group::r--
+mask::rwx
+other::r--
+
+# file: home/kali/dir2/file5
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test5:rwx
+group::r--
+mask::rwx
+other::r--
+
+# file: home/kali/dir2/file6
+# owner: kali
+# group: kali
+user::rw-
+user:test1:rw-
+user:test5:rwx
+group::r--
+mask::rwx
+other::r--
