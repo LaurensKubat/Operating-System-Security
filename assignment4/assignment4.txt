@@ -1,5 +1,5 @@
 1b. The gadget pops 3 values of the stack into %rdi, %rsi and %rdx
-1c. We find helper() at 0x00401050
+1c. We find helper() at 0x401166, which is the start of the first pop instruction
     Running readelf -a vuln, we find the following section:
      [24] .bss              NOBITS           0000000000404050  00003050
        0000000000000010  0000000000000000  WA       0     0     8
